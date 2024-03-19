@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AccountsConfig(AppConfig):
+class EmergencyReportsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'emergency_response_system.accounts'
+    name = 'emergency_reports'
