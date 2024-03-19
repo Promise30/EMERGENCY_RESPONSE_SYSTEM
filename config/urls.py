@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/accounts/', include("emergency_response_system.accounts.api.v1.urls"), name="accounts"),
     path("api/v1/agencies/", include("emergency_response_system.agencies.api.v1.urls"), name="agencies"),
+    path('api/v1/reports/', include("emergency_response_system.reports.api.v1.urls"), name="reports")
 
 ]

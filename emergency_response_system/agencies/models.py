@@ -12,6 +12,6 @@ class Service(BaseModel):
 
 
 class Agency(BaseModel):
-    service = models.ForeignKey(Service, on_delete=models.CAs)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="services")
     agency_name = models.CharField(max_length=200, unique=True, blank=False, null=False)
-    contact_person = models.ForeignKey(User, on_delete=models.PROTECT, related_name="to_be_contacted")
+    # contact_person = models.ForeignKey(User, on_delete=models.PROTECT, related_name="to_be_contacted")

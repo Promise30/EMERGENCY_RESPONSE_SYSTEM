@@ -10,6 +10,7 @@ REST_FRAMEWORK = {
 LOCAL_APPS = [
     "emergency_response_system.accounts",
     "emergency_response_system.agencies",
+    "emergency_response_system.reports"
 ]
 
 
@@ -17,10 +18,9 @@ THIRD_PARTY_APPS = [
     "drf_standardized_errors",
     "rest_framework",
     "rest_framework_simplejwt",
-
 ]
-
 
 INSTALLED_APPS += LOCAL_APPS + THIRD_PARTY_APPS
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
