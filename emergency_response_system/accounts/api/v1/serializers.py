@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from django.db import transaction
 
 User = get_user_model()
 
@@ -12,17 +13,18 @@ class RegistrationSerializer(serializers.ModelSerializer):
         fields = [
             'first_name',
             'last_name',
-            'image',
             'username',
             'email',
             'password',
-            'date_of_birth'
         ]
         
     
     def validate(self, attrs):
         return super().validate(attrs)
     
+    @transaction.atomic
+    def create(self, validated_data):
+        return super().create(validated_data)
 
 
 class SignInSerializer(serializers.Serializer):

@@ -15,9 +15,9 @@ LOCAL_APPS = [
 
 
 THIRD_PARTY_APPS = [
-    "drf_standardized_errors",
     "rest_framework",
     "rest_framework_simplejwt",
+    "drf_standardized_errors",
 ]
 
 INSTALLED_APPS += LOCAL_APPS + THIRD_PARTY_APPS
