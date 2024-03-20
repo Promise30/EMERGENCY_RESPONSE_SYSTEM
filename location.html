@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Get Location</title>
+</head>
+<body>
+  <h1>Get Location</h1>
+  <button id="get-location">Get My Location</button>
+  <p id="location"></p>
+
+  <script>
+    // Function to handle success when retrieving location
+    function success(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      
+      // Display latitude and longitude
+      document.getElementById("location").textContent = "Latitude: " + latitude + ", Longitude: " + longitude;
+    }
+
+    // Function to handle errors when retrieving location
+    function error() {
+      // Display error message
+      alert("Unable to retrieve your location.");
+    }
+
+    // Add an event listener to the button
+    document.getElementById("get-location").addEventListener("click", function() {
+      // Check if geolocation is supported by the browser
+      if (navigator.geolocation) {
+        // Request the user's location
+        navigator.geolocation.getCurrentPosition(success, error);
+      } else {
+        // Display error message if geolocation is not supported
+        alert("Geolocation is not supported by your browser.");
+      }
+    });
+  </script>
+</body>
+</html>
