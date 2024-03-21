@@ -4,7 +4,7 @@ djangorestframework-simplejwt==5.3.1
 python-dotenv==1.0.1
 dj-database-url==2.1.0
 django-cors-headers==4.3.1
-drf-standardized-errors==013.0
+drf-standardized-errors==0.13.0
 psycopg2-binary==2.9.9
 gunicorn==21.2.0
 
