@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.db import transaction
+from rest_framework_simplejwt.tokens import RefreshToken
 
 User = get_user_model()
 
@@ -24,9 +25,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
     
     @transaction.atomic
     def create(self, validated_data):
-        return super().create(validated_data)
+        user = User.objects.create(**validated_data)
+        user.set_password(validated_data["password"])
+        user.save()
 
-
+        return user
 class SignInSerializer(serializers.Serializer):
     email = serializers.EmailField(write_only=True)
     password = serializers.CharField(write_only=True)
@@ -44,22 +47,10 @@ class SignInSerializer(serializers.Serializer):
         else:
             error["credential_error"] = "Please recheck the credentials provided."
             raise serializers.ValidationError(error)
-        
-
-class SignInSerializer(serializers.Serializer):
-    email = serializers.EmailField(write_only=True)
-    password = serializers.CharField(write_only=True)
-
-    def validate(self, attrs) :
-        """
-        This is for validating the values provided by user to login
-        """
-        user = User.objects.filter(email=attrs["email"]).first()
-
-        error = {}
-        if (user and user.check_password(attrs["password"])) and (user.is_active == True):
-            return user
-
-        else:
-            error["credential_error"] = "Please recheck the credentials provided."
-            raise serializers.ValidationError(error)
+    
+    def to_representation(self, instance):
+        refresh = RefreshToken.for_user(instance)
+        return {"refresh": str(refresh), 
+                "access_token": str(refresh.access_token),
+    
+                }
