@@ -30,6 +30,15 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'agency',
+            'first_name',
+            'last_name',
+        ]
 class SignInSerializer(serializers.Serializer):
     email = serializers.EmailField(write_only=True)
     password = serializers.CharField(write_only=True)
@@ -52,5 +61,5 @@ class SignInSerializer(serializers.Serializer):
         refresh = RefreshToken.for_user(instance)
         return {"refresh": str(refresh), 
                 "access_token": str(refresh.access_token),
-    
+                "user": UserSerializer(instance).data
                 }

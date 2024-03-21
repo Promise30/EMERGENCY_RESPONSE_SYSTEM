@@ -29,6 +29,7 @@ class AgencyEmergencySerializer(serializers.ModelSerializer):
     class Meta:
         model = EmergencyReport
         fields =[
+            'id',
             'agency',
             'description',
             'status',
