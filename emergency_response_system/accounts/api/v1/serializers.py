@@ -17,6 +17,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             'username',
             'email',
             'password',
+            'agency'
         ]
         
     
